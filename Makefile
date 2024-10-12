@@ -6,7 +6,7 @@
 #    By: cgomez-z <cgomez-z@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 20:20:40 by cgomez-z          #+#    #+#              #
-#    Updated: 2024/10/10 20:22:12 by cgomez-z         ###   ########.fr        #
+#    Updated: 2024/10/12 18:59:39 by cgomez-z         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -lreadline #-fsanitize=address
 
 #<------------->FILES<------------->
 
