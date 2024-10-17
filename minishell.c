@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini.c                                             :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgomez-z <cgomez-z@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 20:34:50 by cgomez-z          #+#    #+#             */
-/*   Updated: 2024/10/12 18:57:02 by cgomez-z         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:05:43 by cgomez-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
 	char	*line;
 
@@ -24,6 +24,7 @@ int	main(void)
 		if (!line)
 			break ;
 		printf("%s\n", line);
+		printf("%s\n", env[0]);
 		free(line);
 	}
 	return (0);
