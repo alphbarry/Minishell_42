@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alphbarr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 19:02:52 by alphbarr          #+#    #+#             */
-/*   Updated: 2024/10/17 19:57:32 by alphbarr         ###   ########.fr       */
+/*   Created: 2024/07/02 13:17:56 by alphbarr          #+#    #+#             */
+/*   Updated: 2024/07/02 13:20:48 by alphbarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#ifndef PARSER_H
-# define PARSER_H
-
-# include "minishell.h"
-
-typedef struct s_parser
+int	ft_strcmp(const char *s1, const char *s2)
 {
+	int	i;
 
-}	t_parser;<D-Tab>
-
-#endif
+	i = 0;
+	while (s1[i] && s2[i] && s1[2] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
