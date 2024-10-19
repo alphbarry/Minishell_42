@@ -85,11 +85,11 @@ int main()
     t_input input;
     input.tmp_cmd = "echo Hello World";
 
-    char *token = my_strtok(input.tmp_cmd, " ");
+    char *token = ft_tokenizer(input.tmp_cmd, " ");
     while (token != NULL)
     {
         printf("Token: %s\n", token);
-        token = my_strtok(NULL, " ");
+        token = ft_tokenizer(NULL, " ");
     }
     return 0;
 }
