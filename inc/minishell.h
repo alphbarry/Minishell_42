@@ -6,7 +6,7 @@
 /*   By: alphbarr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:15:59 by alphbarr          #+#    #+#             */
-/*   Updated: 2024/10/18 21:12:12 by alphbarr         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:14:01 by alphbarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@
 # include <unistd.h>
 # include <signal.h>
 # include <term.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "./libft/src/libft.h"
+# include "./metachar.h"
 
 /*
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
@@ -57,7 +62,7 @@ typedef struct s_cmd_history
 /* MINISHELL */
 typedef struct s_shell
 {
-	t_dict					*env_vars;// Almacena las variables de entorno que estarAn disponibles para los comandos que ejecute la shell.
+	// t_dict					*env_vars;// Almacena las variables de entorno que estarAn disponibles para los comandos que ejecute la shell.
 	struct termios			term_backup;//Almacena la configuración de terminal antes de que la shell realice modificaciones
 	t_input					cmd_input;//Gestiona la linea de comandos activa, la longitud del prompt, y si el comando proviene o no del historial
 	t_cmd_history			*cmd_history;//Almacena el primer comando en la lista del historial. Permite navegar y manipular el historial de comandos ingresados anteriormente
@@ -65,8 +70,6 @@ typedef struct s_shell
 }	t_shell;
 
 
+/* TOKENS */
 
-
-
-
-
+t_tokens	*tokenize_input(char *input);

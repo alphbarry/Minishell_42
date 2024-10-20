@@ -6,42 +6,83 @@
 #    By: cgomez-z <cgomez-z@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 20:20:40 by cgomez-z          #+#    #+#              #
-#    Updated: 2024/10/12 18:59:39 by cgomez-z         ###   ########.fr        #
+#    Updated: 2024/10/20 19:57:23 by alphbarr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#<------------->CONFIG<------------->
+#<--------------------------------->COLORS<----------------------------------->#
+DEF_COLOR	=	\033[1;99m
+WHITE_BOLD	=	\033[1m
+BLACK		=	\033[1;90m
+RED			=	\033[1;91m
+GREEN		=	\033[1;92m
+YELLOW		=	\033[1;93m
+BLUE		=	\033[1;94m
+PINK		=	\033[1;95m
+CIAN		=	\033[1;96m
 
-NAME = minishell
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -lreadline #-fsanitize=address
+#<--------------------------------->NAME<------------------------------------>#
+NAME		=	minishell
 
-#<------------->FILES<------------->
+#<-------------------------------->HEADERS<---------------------------------->#
+HEADER		=	./inc/
 
-HEADER = minishell.h
-C_FILES = minishell.c
-O_FILES = $(C_FILES:.c=.o)
+#<--------------------------------->DIRS<------------------------------------>#
+SRC_DIR		=	src/
+OBJ_DIR		=	objects/
 
-#<------------->RULES<------------->
+#<--------------------------------->FILES<---------------------------------->#
+FILES		=	main.c \
+				tokens.c
 
-all: $(NAME)
+#<--------------------------------->SRCS<----------------------------------->#
+SRCS		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
 
-%.o: %.c $(HEADER) Makefile
-	$(CC) $(CFLAGS) -c $< -o $@
+#<----------------------------->OBJS && DEPS<------------------------------->#
+OBJS		=	$(addprefix $(OBJ_DIR), $(subst .c,.o,$(FILES)))
+DEPS		=	$(subst .o,.d,$(OBJS))
 
-$(NAME): $(O_FILES)
-	$(CC) $(CFLAGS) $(O_FILES) -o $(NAME)
+#<-------------------------------->COMANDS<---------------------------------->#
+INCLUDE		=	-I$(HEADER)
+RM			=	rm -rf
+MKD			=	mkdir -p
+MK			=	Makefile
+CC			=	gcc
+CFLAGS		=	-Wall -Wextra -Werror -g -lreadline #-fsanitize=address
+MKFLAGS		=	--no-print-directory
 
-#<------------->PHONY<------------->
+#<--------------------------------->RULES<----------------------------------->#
+$(OBJ_DIR)%.o	:$(SRC_DIR)%.c $(MK)
+	@$(MKD) $(dir $@)
+	@printf "$(PINK)    \rCompiling: $(YELLOW)$(notdir $<)...$(DEF_COLOR)       \r"
+	@$(CC) -MT $@ $(CFLAGS) -MMD -MP $(INCLUDE) -c $< -o $@
 
-clean:
-	$(RM) $(O_FILES)
+all				:
+	@$(MAKE) $(MKFLAGS) $(NAME)
 
-fclean: clean
-	$(RM) $(NAME)
 
-re: fclean all
+$(NAME)			:	$(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $@
+	@echo "\n$(GREEN)Minishell has been compiled$(DEF_COLOR)"
 
-.PHONY: all clean fclean re
+clean			:
+	@$(RM) $(OBJ_DIR) $(B_OBJ_DIR)
+	@echo ""
+	@echo "$(RED)All OBJS && DEPS has been removed$(DEF_COLOR)"
+	@echo ""
 
-#<------------->8<------------->
+fclean			:
+	@$(MAKE) $(MKFLAGS) clean
+	@$(RM) $(NAME) $(B_NAME)
+	@echo ""
+	@echo "$(RED)Program has been removed$(DEF_COLOR)"
+
+re				:
+	@$(MAKE) $(MKFLAGS) fclean
+	@$(MAKE) $(MKFLAGS) all
+	@echo ""
+	@echo "$(CIAN)Minishell has been recompiled$(DEF_COLOR)"
+
+.PHONY			: all clean fclean re
+
+-include		$(DEPS)

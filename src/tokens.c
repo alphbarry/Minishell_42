@@ -79,17 +79,3 @@ t_tokens	*tokenize_input(char *input)
 	}
 	return(res);
 }
-
-int main()
-{
-    t_input input;
-    input.tmp_cmd = "echo Hello World";
-
-    char *token = ft_tokenizer(input.tmp_cmd, " ");
-    while (token != NULL)
-    {
-        printf("Token: %s\n", token);
-        token = ft_tokenizer(NULL, " ");
-    }
-    return 0;
-}
